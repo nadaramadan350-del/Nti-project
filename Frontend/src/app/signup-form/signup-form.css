@@ -1,0 +1,95 @@
+.form-container {
+  max-width: 650px;
+  margin: 40px auto;
+  padding: 35px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+}
+
+.col {
+  flex: 1;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #34495e;
+  font-size: 14px;
+}
+
+input,
+select {
+  padding: 12px 15px;
+  border: 1px solid #dcdde1;
+  border-radius: 6px;
+  font-size: 15px;
+  color: #2f3640;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2ecc71; /* لون أخضر هادئ للتسجيل */
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(46, 204, 113, 0.2);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background-color: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 15px;
+}
+
+.submit-btn:hover {
+  background-color: #27ae60;
+}
+
+.submit-btn:active {
+  background-color: #219653;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+
+.error-message{
+  font-size: 12px;
+  color: red;
+}

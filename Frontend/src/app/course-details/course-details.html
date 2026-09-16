@@ -1,0 +1,40 @@
+
+  <div class="simple-details-container">
+    
+    <div class="simple-banner">
+      <img [src]="'http://localhost:5000/api/v1/uploads/courses/' + course()?.imageUrl" [alt]="course()?.title">
+    </div>
+
+    <div class="simple-header">
+      <span class="category-tag">{{ course()?.category }}</span>
+      <h1>{{ course()?.title }}</h1>
+      <p class="instructor-name">Course Instructor: <strong>{{ course()?.instructor }}</strong></p>
+      
+      <div class="quick-meta">
+        <span>⏱️ {{ course()?.duration }}</span>
+        <span>•</span>
+        <span>📊 {{ course()?.level }}</span>
+        <span>•</span>
+        <span>⭐ {{ course()?.rating }} Rating</span>
+      </div>
+    </div>
+
+    <div class="cta-action-bar">
+      <div class="price-tag">
+        @if (course()?.price === 0) {
+          <span class="free-text">Free</span>
+        } @else {
+          <span>{{ course()?.price }}</span>
+        }
+      </div>
+     
+    </div>
+
+    <section class="details-section">
+      <h2>Description</h2>
+      <p class="desc-text">{{ course()?.description }}</p>
+    </section>
+
+  
+
+  </div>

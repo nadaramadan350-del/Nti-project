@@ -1,0 +1,42 @@
+<main class="content-area">
+  <div class="section-header">
+    <h2>Explore Our Popular Courses</h2>
+    <p>Start your learning journey today with industry experts and engineers.</p>
+  </div>
+
+  <div class="courses-grid">
+    @for (course of courses(); track course._id) {
+      <div class="course-card"  (click)="showCourse(course._id)">
+        <div class="course-image-container">
+          <img
+            [src]="'http://localhost:5000/api/v1/uploads/courses/' + course.imageUrl"
+            [alt]="course.title"
+            class="course-image"
+          />
+          <div class="course-badge" [class.free]="course.price === 0">
+            {{ course.level }}
+          </div>
+        </div>
+
+        <div class="course-content">
+          <h3 class="course-title">{{ course.title }}</h3>
+          <p class="instructor">Instructor: {{ course.instructor }}</p>
+
+          <div class="course-footer">
+            @if (course.price === 0) {
+              <span class="price free-text">Free</span>
+            } @else {
+              <span class="price">{{ course.price }}</span>
+            }
+            <span class="duration">⏱️ {{ course.duration }}</span>
+          </div>
+
+          
+          <button class="btn-add-course" (click)="enroll(course._id)">Enroll</button>
+        </div>
+      </div>
+    } @empty {
+      <p class="no-data">No courses are available right now.</p>
+    }
+  </div>
+</main>

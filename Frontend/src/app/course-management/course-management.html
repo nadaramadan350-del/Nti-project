@@ -1,0 +1,27 @@
+<div class="page">
+  <!-- Header -->
+  <div class="header">
+    <h2>Courses Management</h2>
+    <button class="add-btn" (click)="onAddCourse()">+ Add Course</button>
+  </div>
+
+  <!-- Grid -->
+  <div class="courses-grid">
+    @for (course of courses(); track course._id) {
+      <div class="course-card">
+        <img [src]="'http://localhost:5000/api/v1/uploads/courses/' + course.imageUrl" />
+        <div class="content">
+          <h3>{{ course.title }}</h3>
+
+          <p class="instructor">By: {{ course.instructor }}</p>
+
+          <div class="actions">
+            <button class="show" (click)="onShow(course)">Show</button>
+            <button class="update" (click)="onUpdate(course)">Update</button>
+            <button class="delete" (click)="onDelete(course._id)">Delete</button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

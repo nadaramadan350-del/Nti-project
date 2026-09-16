@@ -1,0 +1,132 @@
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 52px;
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(79, 70, 229, 0.08);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: linear-gradient(135deg, #312e81 0%, #4f46e5 35%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-decoration: none;
+}
+
+.navigation {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: #475569;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.nav-links a:hover,
+.active-link {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  box-shadow: 0 12px 22px rgba(79, 70, 229, 0.22);
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-login {
+  background: rgba(79, 70, 229, 0.08);
+  color: #312e81;
+  border: 1px solid rgba(79, 70, 229, 0.18);
+}
+
+.btn-login:hover {
+  background: rgba(79, 70, 229, 0.12);
+}
+
+.btn-signup {
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #ffffff;
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.25);
+}
+
+.btn-signup:hover {
+  filter: brightness(1.05);
+}
+
+.btn-logout {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #ffffff;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+  box-shadow: 0 10px 20px rgba(239, 68, 68, 0.25);
+}
+
+@media (max-width: 768px) {
+  .main-header {
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px 18px;
+  }
+
+  .navigation {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nav-links {
+    gap: 4px;
+  }
+
+  .nav-links a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+}
+

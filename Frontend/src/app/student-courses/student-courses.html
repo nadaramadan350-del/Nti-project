@@ -1,0 +1,33 @@
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>My Enrolled Courses</h2>
+    <p>Track your learning progress and continue where you left off.</p>
+  </div>
+
+  
+    <div class="user-courses-grid">
+      @for (course of courses(); track course._id) {
+        <div class="user-course-card">
+          
+          <div class="course-image-wrapper">
+            <img [src]=" 'http://localhost:5000/api/v1/uploads/courses/' + course.imageUrl" [alt]="course.title" class="course-img">
+          </div>
+
+          <div class="course-info">
+            <h3 class="course-title">{{ course.title }}</h3>
+            <p class="instructor">By {{ course.instructor }}</p>
+            
+           
+            
+          </div>
+
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <p>You haven't enrolled in any courses yet.</p>
+          <a href="/courses" class="browse-btn">Browse Courses</a>
+        </div>
+      }
+    </div>
+  
+</div>

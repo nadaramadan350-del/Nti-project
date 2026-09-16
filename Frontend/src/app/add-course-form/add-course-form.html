@@ -1,0 +1,171 @@
+<div class="form-container">
+  <h2>Add New Course</h2>
+
+  <form [formGroup]="addCourseForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Course Title</label>
+      <input
+        id="title"
+        name="title"
+        type="text"
+        placeholder="e.g. Angular Advanced Guide"
+        formControlName="title"
+      />
+
+      @if (addCourseForm.get('title')?.invalid && addCourseForm.get('title')?.touched) {
+        @if (addCourseForm.get('title')?.errors?.['required']) {
+          <div class="error-message">*Course title is required</div>
+        }
+        @if (addCourseForm.get('title')?.errors?.['minlength']) {
+          <div class="error-message">Course title must be at least 3 characters</div>
+        }
+        @if (addCourseForm.get('title')?.errors?.['maxlength']) {
+          <div class="error-message">Course title cannot exceed 100 characters</div>
+        }
+      }
+    </div>
+    <div class="form-group">
+      <label for="instructor">Instructor Name</label>
+      <input
+        id="instructor"
+        name="instructor"
+        type="text"
+        placeholder="e.g. John Doe"
+        formControlName="instructor"
+      />
+
+      @if (addCourseForm.get('instructor')?.invalid && addCourseForm.get('instructor')?.touched) {
+        @if (addCourseForm.get('instructor')?.errors?.['required']) {
+          <div class="error-message">*Course instructor is required</div>
+        }
+      }
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="category">Category</label>
+        <select id="category" name="category" formControlName="category">
+          <option value="" disabled selected>Select Category</option>
+          @for (cat of categories; track $index) {
+            <option [value]="cat">{{ cat | titlecase }}</option>
+          }
+        </select>
+        @if (addCourseForm.get('category')?.invalid && addCourseForm.get('category')?.touched) {
+          @if (addCourseForm.get('category')?.errors?.['required']) {
+            <div class="error-message">*Course category is required</div>
+          }
+        }
+      </div>
+      <div class="form-group col">
+        <label for="level">Course Level</label>
+        <select id="level" name="level" formControlName="level">
+          <option value="" disabled selected>Select Level</option>
+          @for (lev of levels; track $index) {
+            <option [value]="lev">{{ lev | titlecase }}</option>
+          }
+        </select>
+        @if (addCourseForm.get('level')?.invalid && addCourseForm.get('level')?.touched) {
+          @if (addCourseForm.get('level')?.errors?.['required']) {
+            <div class="error-message">*Course level is required</div>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="price">Price ($)</label>
+        <input
+          id="price"
+          name="price"
+          type="number"
+          step="0.01"
+          placeholder="0.00"
+          formControlName="price"
+        />
+        @if (addCourseForm.get('price')?.invalid && addCourseForm.get('price')?.touched) {
+          @if (addCourseForm.get('price')?.errors?.['required']) {
+            <div class="error-message">*Course price is required</div>
+          }
+          @if (addCourseForm.get('price')?.errors?.['min']) {
+            <div class="error-message">Course price cannot be negative</div>
+          }
+        }
+      </div>
+      <div class="form-group col">
+        <label for="duration">Duration</label>
+        <input
+          id="duration"
+          name="duration"
+          type="text"
+          placeholder="e.g. 12 Hours, 4 Weeks"
+          formControlName="duration"
+        />
+        @if (addCourseForm.get('duration')?.invalid && addCourseForm.get('duration')?.touched) {
+          @if (addCourseForm.get('duration')?.errors?.['required']) {
+            <div class="error-message">*Course duration is required</div>
+          }
+          @if (addCourseForm.get('duration')?.errors?.['min']) {
+            <div class="error-message">Course duration cannot be negative</div>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col">
+        <label for="rating">Initial Rating</label>
+        <input
+          id="rating"
+          name="rating"
+          type="number"
+          step="0.1"
+          value="0"
+          formControlName="rating"
+        />
+        @if (addCourseForm.get('rating')?.invalid && addCourseForm.get('rating')?.touched) {
+          @if (addCourseForm.get('rating')?.errors?.['min']) {
+            <div class="error-message">Course rating must be at least 0</div>
+          }
+          @if (addCourseForm.get('rating')?.errors?.['max']) {
+            <div class="error-message">Course rating cannot exceed 5</div>
+          }
+        }
+      </div>
+      <div class="form-group col">
+        <label for="students">Initial Students</label>
+        <input id="students" name="students" type="number" value="0" formControlName="students" />
+        @if (addCourseForm.get('students')?.invalid && addCourseForm.get('students')?.touched) {
+          @if (addCourseForm.get('students')?.errors?.['min']) {
+            <div class="error-message">Course students cannot be negative</div>
+          }
+        }
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">Course Image URL</label>
+      <input id="imageUrl" name="imageUrl" type="file" accept="image/*" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea
+        id="description"
+        name="description"
+        rows="4"
+        placeholder="Describe the course content..."
+        formControlName="description"
+      ></textarea>
+       @if (addCourseForm.get('description')?.invalid && addCourseForm.get('description')?.touched) {
+       
+        @if (addCourseForm.get('description')?.errors?.['maxlength']) {
+          <div class="error-message">Course description cannot exceed 1000 characters</div>
+        }
+      }
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-message">
+        *{{errorMessage()}}
+      </div>
+    }
+
+    <button type="submit" class="submit-btn" [disabled]="addCourseForm.invalid">Create Course</button>
+  </form>
+</div>
