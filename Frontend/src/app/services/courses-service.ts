@@ -5,7 +5,7 @@ import { CourseInterface } from '../interfaces/course-interface';
 
 @Service()
 export class CoursesService {
-  private baseUrl = 'http://localhost:5000/api/v1/courses';
+  private baseUrl = '/api/v1/courses';
 
   private httpClient = inject(HttpClient);
 

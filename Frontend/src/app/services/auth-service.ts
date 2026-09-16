@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 @Service()
 export class AuthService {
-  private baseUrl = 'http://localhost:5000/api/v1/auth';
+  private baseUrl = '/api/v1/auth';
 
   private httpClient = inject(HttpClient);
 

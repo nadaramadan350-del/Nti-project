@@ -60,7 +60,8 @@
               "buildTarget": "courses-management-system-client:build:production"
             },
             "development": {
-              "buildTarget": "courses-management-system-client:build:development"
+              "buildTarget": "courses-management-system-client:build:development",
+              "proxyConfig": "proxy.conf.json"
             }
           },
           "defaultConfiguration": "development"

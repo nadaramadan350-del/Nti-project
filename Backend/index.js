@@ -19,8 +19,12 @@ dbConnect();
 
 const app = express();
 
+const port = process.env.PORT || 5000;
+const allowedOrigins = process.env.FRONTEND_ORIGIN
+  ? process.env.FRONTEND_ORIGIN.split(',').map((origin) => origin.trim())
+  : true;
 
-app.use(cors({origin: "http://localhost:4200"}));
+app.use(cors({ origin: allowedOrigins }));
 
 app.use(express.json());
 
@@ -33,6 +37,6 @@ app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/users", userRouter);
 
 
-app.listen(process.env.PORT, () => {
-  console.log("Server listening on port 5000");
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server listening on port ${port}`);
 });

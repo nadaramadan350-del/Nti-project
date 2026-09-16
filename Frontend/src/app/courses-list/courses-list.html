@@ -9,7 +9,7 @@
       <div class="course-card"  (click)="showCourse(course._id)">
         <div class="course-image-container">
           <img
-            [src]="'http://localhost:5000/api/v1/uploads/courses/' + course.imageUrl"
+            [src]="'/api/v1/uploads/courses/' + course.imageUrl"
             [alt]="course.title"
             class="course-image"
           />

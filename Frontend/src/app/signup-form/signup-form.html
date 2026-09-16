@@ -8,7 +8,7 @@
         <input id="firstName" type="text" placeholder="John" [formField]="signupForm.firstName" />
         @if (signupForm.firstName().invalid() && signupForm.firstName().touched()) {
           <div class="error-message">
-            @for (error of signupForm.firstName().errors(); track error) {
+            @for (error of signupForm.firstName().errors(); track $index) {
               <p>{{ error.message }}</p>
             }
           </div>
@@ -21,7 +21,7 @@
 
         @if (signupForm.lastName().invalid() && signupForm.lastName().touched()) {
           <div class="error-message">
-            @for (error of signupForm.lastName().errors(); track error) {
+            @for (error of signupForm.lastName().errors(); track $index) {
               <p>{{ error.message }}</p>
             }
           </div>
@@ -40,7 +40,7 @@
         />
         @if (signupForm.email().invalid() && signupForm.email().touched()) {
           <div class="error-message">
-            @for (error of signupForm.email().errors(); track error) {
+            @for (error of signupForm.email().errors(); track $index) {
               <p>{{ error.message }}</p>
             }
           </div>
@@ -52,7 +52,7 @@
         <input id="phone" type="tel" placeholder="0123456789" [formField]="signupForm.phone" />
         @if (signupForm.phone().invalid() && signupForm.phone().touched()) {
           <div class="error-message">
-            @for (error of signupForm.phone().errors(); track error) {
+            @for (error of signupForm.phone().errors(); track $index) {
               <p>{{ error.message }}</p>
             }
           </div>
@@ -71,7 +71,7 @@
         />
         @if (signupForm.password().invalid() && signupForm.password().touched()) {
           <div class="error-message">
-            @for (error of signupForm.password().errors(); track error) {
+            @for (error of signupForm.password().errors(); track $index) {
               <p>{{ error.message }}</p>
             }
           </div>

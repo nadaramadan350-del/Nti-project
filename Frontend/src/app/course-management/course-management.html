@@ -9,7 +9,7 @@
   <div class="courses-grid">
     @for (course of courses(); track course._id) {
       <div class="course-card">
-        <img [src]="'http://localhost:5000/api/v1/uploads/courses/' + course.imageUrl" />
+        <img [src]="'/api/v1/uploads/courses/' + course.imageUrl" />
         <div class="content">
           <h3>{{ course.title }}</h3>
 
