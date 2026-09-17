@@ -1,1 +1,39 @@
-<router-outlet></router-outlet>
+<div class="student-shell">
+  <header class="student-topbar">
+    <div>
+      <p class="eyebrow">Student Area</p>
+      <h1>My Dashboard</h1>
+    </div>
+  </header>
+
+  <section class="hero-box">
+    <div>
+      <p class="mini-label">Welcome back</p>
+      <h2>Continue your learning journey</h2>
+    </div>
+    <a routerLink="/home" class="browse-btn">Browse Courses</a>
+  </section>
+
+  <section class="stats-grid">
+    <div class="stat-card blue">
+      <span class="stat-label">Enrolled</span>
+      <strong>12</strong>
+    </div>
+    <div class="stat-card purple">
+      <span class="stat-label">In Progress</span>
+      <strong>5</strong>
+    </div>
+    <div class="stat-card green">
+      <span class="stat-label">Completed</span>
+      <strong>7</strong>
+    </div>
+  </section>
+
+  <section class="courses-panel">
+    <div class="panel-header">
+      <h3>My Courses</h3>
+      <a routerLink="/home">View all</a>
+    </div>
+    <router-outlet></router-outlet>
+  </section>
+</div>

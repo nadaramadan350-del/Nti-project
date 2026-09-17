@@ -32,7 +32,11 @@
           </div>
 
           
-          <button class="btn-add-course" (click)="enroll(course._id)">Enroll</button>
+          @if (isEnrolled(course._id)) {
+            <button class="btn-add-course enrolled-btn" disabled (click)="$event.stopPropagation()">Enrolled</button>
+          } @else {
+            <button class="btn-add-course" (click)="$event.stopPropagation(); enroll(course._id)">Enroll</button>
+          }
         </div>
       </div>
     } @empty {

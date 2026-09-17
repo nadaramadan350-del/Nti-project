@@ -1,1 +1,50 @@
-<router-outlet></router-outlet>
+<div class="admin-shell">
+  <aside class="sidebar">
+    <div class="brand-wrap">
+      <div class="brand-badge">A</div>
+      <div>
+        <p class="brand-label">Admin</p>
+        <h2>Course Hub</h2>
+      </div>
+    </div>
+
+    <nav class="nav-menu">
+      <a routerLink="/admin-dashboard" class="nav-item active">
+        <span>📚</span>
+        <span>Manage Courses</span>
+      </a>
+      <a routerLink="/admin-dashboard/add-course" class="nav-item">
+        <span>➕</span>
+        <span>Add Course</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-panel">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Dashboard</p>
+        <h1>Admin Overview</h1>
+      </div>
+    </header>
+
+    <section class="stats-grid">
+      <div class="stat-card accent-blue">
+        <span class="stat-label">Total Courses</span>
+        <strong>24</strong>
+      </div>
+      <div class="stat-card accent-green">
+        <span class="stat-label">Active Students</span>
+        <strong>310</strong>
+      </div>
+      <div class="stat-card accent-orange">
+        <span class="stat-label">Pending Reviews</span>
+        <strong>8</strong>
+      </div>
+    </section>
+
+    <section class="content-panel">
+      <router-outlet></router-outlet>
+    </section>
+  </main>
+</div>

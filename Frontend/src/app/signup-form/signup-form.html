@@ -1,103 +1,122 @@
-<div class="form-container">
-  <h2>Create Account</h2>
-
-  <form [formRoot]="signupForm">
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="firstName">First Name *</label>
-        <input id="firstName" type="text" placeholder="John" [formField]="signupForm.firstName" />
-        @if (signupForm.firstName().invalid() && signupForm.firstName().touched()) {
-          <div class="error-message">
-            @for (error of signupForm.firstName().errors(); track $index) {
-              <p>{{ error.message }}</p>
-            }
-          </div>
-        }
-      </div>
-
-      <div class="form-group col">
-        <label for="lastName">Last Name *</label>
-        <input id="lastName" type="text" placeholder="Doe" [formField]="signupForm.lastName" />
-
-        @if (signupForm.lastName().invalid() && signupForm.lastName().touched()) {
-          <div class="error-message">
-            @for (error of signupForm.lastName().errors(); track $index) {
-              <p>{{ error.message }}</p>
-            }
-          </div>
-        }
-      </div>
+<div class="signup-page">
+  <div class="form-container">
+    <div class="form-header">
+      <span class="badge">Join us</span>
+      <h2>Create Account</h2>
+      <p>Start learning or manage courses with your account.</p>
     </div>
 
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="email">Email Address *</label>
-        <input
-          id="email"
-          type="email"
-          placeholder="john.doe@example.com"
-          [formField]="signupForm.email"
-        />
-        @if (signupForm.email().invalid() && signupForm.email().touched()) {
-          <div class="error-message">
-            @for (error of signupForm.email().errors(); track $index) {
-              <p>{{ error.message }}</p>
-            }
-          </div>
-        }
+    <form [formRoot]="signupForm" class="signup-form">
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="firstName">First Name *</label>
+          <input id="firstName" type="text" placeholder="John" [formField]="signupForm.firstName" />
+          @if (signupForm.firstName().invalid() && signupForm.firstName().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.firstName().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group col">
+          <label for="lastName">Last Name *</label>
+          <input id="lastName" type="text" placeholder="Doe" [formField]="signupForm.lastName" />
+
+          @if (signupForm.lastName().invalid() && signupForm.lastName().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.lastName().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
       </div>
 
-      <div class="form-group col">
-        <label for="phone">Phone Number</label>
-        <input id="phone" type="tel" placeholder="0123456789" [formField]="signupForm.phone" />
-        @if (signupForm.phone().invalid() && signupForm.phone().touched()) {
-          <div class="error-message">
-            @for (error of signupForm.phone().errors(); track $index) {
-              <p>{{ error.message }}</p>
-            }
-          </div>
-        }
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="email">Email Address *</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="john.doe@example.com"
+            [formField]="signupForm.email"
+          />
+          @if (signupForm.email().invalid() && signupForm.email().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.email().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group col">
+          <label for="phone">Phone Number</label>
+          <input id="phone" type="tel" placeholder="0123456789" [formField]="signupForm.phone" />
+          @if (signupForm.phone().invalid() && signupForm.phone().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.phone().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
       </div>
-    </div>
 
-    <div class="form-row">
-      <div class="form-group col">
-        <label for="password">Password *</label>
-        <input
-          id="password"
-          type="password"
-          placeholder="At least 8 characters"
-          [formField]="signupForm.password"
-        />
-        @if (signupForm.password().invalid() && signupForm.password().touched()) {
-          <div class="error-message">
-            @for (error of signupForm.password().errors(); track $index) {
-              <p>{{ error.message }}</p>
-            }
-          </div>
-        }
+      <div class="form-row">
+        <div class="form-group col">
+          <label for="password">Password *</label>
+          <input
+            id="password"
+            type="password"
+            placeholder="At least 8 characters"
+            [formField]="signupForm.password"
+          />
+          @if (signupForm.password().invalid() && signupForm.password().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.password().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="form-group col">
+          <label for="role">Role *</label>
+          <select id="role" [formField]="signupForm.role">
+            <option value="student">Student</option>
+            <option value="admin">Admin</option>
+          </select>
+          @if (signupForm.role().invalid() && signupForm.role().touched()) {
+            <div class="error-message">
+              @for (error of signupForm.role().errors(); track $index) {
+                <p>{{ error.message }}</p>
+              }
+            </div>
+          }
+        </div>
       </div>
-    </div>
 
-    <div class="form-group">
-      <label for="imageUrl">Profile Image</label>
-      <input id="imageUrl" type="file" #fileInput accept="image/*"  (change)="onFileSelected($event)" />
-    </div>
-
-
-    @if (errorMessage()) {
-      <div class="error-message">
-        *{{errorMessage()}}
+      <div class="form-group upload-group">
+        <label for="imageUrl">Profile Image</label>
+        <input id="imageUrl" type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" />
       </div>
-    }
 
-    <button type="submit" class="submit-btn" [disabled]="signupForm().submitting()">
-      
-      @if (signupForm().submitting()) {
-        Loading...
-      } @else {
-        Register
+      @if (errorMessage()) {
+        <div class="error-message general-error">
+          *{{errorMessage()}}
+        </div>
       }
-    </button>
-  </form>
+
+      <button type="submit" class="submit-btn" [disabled]="signupForm().submitting()">
+        @if (signupForm().submitting()) {
+          Loading...
+        } @else {
+          Register
+        }
+      </button>
+    </form>
+  </div>
 </div>

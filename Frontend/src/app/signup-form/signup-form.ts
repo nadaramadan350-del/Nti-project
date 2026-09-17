@@ -38,6 +38,7 @@ export class SignupForm {
     email: '',
     password: '',
     phone: '',
+    role: 'student',
     imageUrl: null,
   });
 
@@ -54,6 +55,7 @@ export class SignupForm {
         pattern(schema.email, /^[^\s@]+@[^\s@]+\.[^\s@]+$/, { message: 'Invalid Email' }),
         required(schema.password, { message: 'Password is required' }),
         minLength(schema.password, 8, { message: 'Password must be at least 8 characters' }),
+        required(schema.role, { message: 'Role is required' }),
         pattern(schema.phone, /^\+?[0-9]{10,15}$/, { message: 'Invalid Phone number' }));
     },
 
@@ -72,6 +74,7 @@ export class SignupForm {
           formData.append('email', formValue.email);
           formData.append('password', formValue.password);
           formData.append('phone', formValue.phone);
+          formData.append('role', formValue.role || 'student');
 
           if (this.fileSelected) {
             formData.append('imageUrl', this.fileSelected);
@@ -86,6 +89,7 @@ export class SignupForm {
                 email: '',
                 password: '',
                 phone: '',
+                role: 'student',
                 imageUrl: null,
               });
               this.fileSelected = null;

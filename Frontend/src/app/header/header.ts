@@ -12,6 +12,10 @@ export class Header {
   authService = inject(AuthService);
   router = inject(Router);
 
+  get currentRole(): string {
+    return this.authService.getRole() || 'guest';
+  }
+
   logout() {
     this.authService.logout();
     this.router.navigateByUrl('/home');

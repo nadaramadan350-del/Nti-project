@@ -29,25 +29,31 @@ export class CourseManagement implements OnInit {
     });
   }
 
-router = inject(Router);
-onAddCourse() {
-   this.router.navigateByUrl('/admin-dashboard/add-course');
+  router = inject(Router);
+
+  onAddCourse() {
+    this.router.navigateByUrl('/admin-dashboard/add-course');
   }
-  onShow(course: any) {}
-  onUpdate(course: any) {}
+
+  onShow(course: CourseInterface) {
+    this.router.navigate(['/course-details', course._id]);
+  }
+
+  onUpdate(course: CourseInterface) {
+    this.router.navigate(['/admin-dashboard/add-course'], {
+      queryParams: { edit: course._id },
+    });
+  }
 
   onDelete(courseId: string) {
     this.courseService.deleteCourse(courseId).subscribe({
       next: () => {
         this.courses.update((courses) => courses.filter((c) => c._id !== courseId));
       },
-      error: (err)=>{
-        console.log(localStorage);
-        
+      error: (err) => {
         this.errorMessage.set('Failed to delete course');
         console.log(err);
-        
-      }
+      },
     });
   }
 }

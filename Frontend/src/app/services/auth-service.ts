@@ -26,18 +26,36 @@ export class AuthService {
     }
   }
   getRole(): string | null {
-    const decoded = this.getDecodedToken();
+    const savedRole = localStorage.getItem('userRole');
+    if (savedRole) {
+      return savedRole;
+    }
 
-    if (!decoded) {
+    const decoded = this.getDecodedToken();
+    if (!decoded || !decoded.role) {
       return null;
     }
 
+    localStorage.setItem('userRole', decoded.role);
     return decoded.role;
   }
+
+  private syncRoleFromToken() {
+    const decoded = this.getDecodedToken();
+    if (!decoded || !decoded.role) {
+      localStorage.removeItem('userRole');
+      return null;
+    }
+
+    localStorage.setItem('userRole', decoded.role);
+    return decoded.role;
+  }
+
   isLoggedIn() {
     const token = localStorage.getItem('token');
     if (!token) {
       this.isLoggedInSignal.set(false);
+      localStorage.removeItem('userRole');
       return false;
     }
 
@@ -47,14 +65,17 @@ export class AuthService {
 
       if (expirationDate < new Date()) {
         localStorage.removeItem('token');
+        localStorage.removeItem('userRole');
         this.isLoggedInSignal.set(false);
         return false;
       }
 
+      this.syncRoleFromToken();
       this.isLoggedInSignal.set(true);
       return true;
     } catch {
       localStorage.removeItem('token');
+      localStorage.removeItem('userRole');
       this.isLoggedInSignal.set(false);
       return false;
     }
@@ -66,8 +87,9 @@ export class AuthService {
       tap((res) => {
         this.isLoggedInSignal.set(true);
         localStorage.setItem('token', res.token);
-        console.log(localStorage);
-        const role = this.getRole();
+
+        const role = res?.data?.user?.role || this.syncRoleFromToken() || 'student';
+        localStorage.setItem('userRole', role);
 
         if (role === 'admin') {
           this.router.navigate(['/admin-dashboard']);
@@ -83,7 +105,15 @@ export class AuthService {
       tap((res) => {
         this.isLoggedInSignal.set(true);
         localStorage.setItem('token', res.token);
-        this.router.navigate(['/student-dashboard']);
+
+        const role = res?.data?.user?.role || this.syncRoleFromToken() || 'student';
+        localStorage.setItem('userRole', role);
+
+        if (role === 'admin') {
+          this.router.navigate(['/admin-dashboard']);
+        } else {
+          this.router.navigate(['/student-dashboard']);
+        }
       }),
     );
   }
@@ -91,5 +121,6 @@ export class AuthService {
   logout() {
     this.isLoggedInSignal.set(false);
     localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
   }
 }

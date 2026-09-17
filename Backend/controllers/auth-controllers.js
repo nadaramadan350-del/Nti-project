@@ -7,9 +7,11 @@ const bcryptjs = require("bcryptjs");
 
 const signup = async (req, res) => {
   try {
+    const role = req.body.role?.toLowerCase() === "admin" ? "admin" : "student";
+
     const user = await User.create({
       ...req.body,
-      role: "student",
+      role,
       imageUrl: req.file?.filename,
     });
 

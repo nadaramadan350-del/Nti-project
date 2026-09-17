@@ -13,8 +13,12 @@ import { Router } from '@angular/router';
 })
 export class CoursesList implements OnInit {
   courses = signal<CourseInterface[]>([]);
+  enrolledCourseIds = signal<string[]>([]);
 
   courseService = inject(CoursesService);
+  authService = inject(AuthService);
+  userService = inject(UserService);
+  router = inject(Router);
 
   errorMessage = signal('');
 
@@ -22,6 +26,17 @@ export class CoursesList implements OnInit {
     this.courseService.getAllCourses().subscribe({
       next: (data) => {
         this.courses.set(data);
+
+        if (this.authService.isLoggedIn()) {
+          this.userService.getUserCourses().subscribe({
+            next: (enrolledCourses) => {
+              this.enrolledCourseIds.set(enrolledCourses.map((course) => course._id));
+            },
+            error: () => {
+              this.enrolledCourseIds.set([]);
+            },
+          });
+        }
       },
       error: (err) => {
         this.errorMessage.set('Failed to load courses. Please try again later.');
@@ -31,31 +46,35 @@ export class CoursesList implements OnInit {
     });
   }
 
-  authService = inject(AuthService);
-  userService = inject(UserService);
-  router = inject(Router);
-
   enroll(courseId: string) {
-    if (this.authService.isLoggedIn()) {
-  
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/signin');
+      return;
+    }
+
+    if (this.enrolledCourseIds().includes(courseId)) {
+      alert('You are already enrolled in this course');
+      return;
+    }
+
       this.userService.addCourseToUser(courseId).subscribe({
         next: (courses) => {
-          console.log(courses);
-          alert("Course added successfully")
+          this.enrolledCourseIds.set(courses.map((course) => course._id));
+          alert('Course added successfully');
         },
-        error: (err)=>{
+        error: (err) => {
           this.errorMessage.set('Cannot enroll in the course');
-          alert(this.errorMessage())
+          alert(this.errorMessage());
           console.log(err);
-          
-        }
+        },
       });
-    } else {
-      this.router.navigateByUrl('/signin');
-    }
   }
 
   showCourse(courseId: string){
     this.router.navigateByUrl(`course-details/${courseId}`);
+  }
+
+  isEnrolled(courseId: string): boolean {
+    return this.enrolledCourseIds().includes(courseId);
   }
 }

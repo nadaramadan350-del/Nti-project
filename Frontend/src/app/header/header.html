@@ -1,6 +1,6 @@
 <header class="main-header">
   <div class="header-brand">
-    <a routerLink="/home"   class="logo"> CoursePlatform</a>
+    <a routerLink="/home" class="logo">CoursePlatform</a>
   </div>
 
   <nav class="navigation">
@@ -8,18 +8,36 @@
       <li>
         <a routerLink="/home" class="active-link">Home</a>
       </li>
+
+      @if (authService.isLoggedInSignal()) {
+        @if (currentRole === 'admin') {
+          <li>
+            <a routerLink="/admin-dashboard">Manage Courses</a>
+          </li>
+          <li>
+            <a routerLink="/admin-dashboard/add-course">Add Course</a>
+          </li>
+        } @else if (currentRole === 'student') {
+          <li>
+            <a routerLink="/student-dashboard">My Courses</a>
+          </li>
+          <li>
+            <a routerLink="/home">Browse Courses</a>
+          </li>
+        }
+      }
     </ul>
 
-
     @if (authService.isLoggedInSignal()) {
-      <button class="btn btn-logout" (click)="logout()">Logout</button>
+      <div class="user-box">
+        <span class="role-pill">{{ currentRole }}</span>
+        <button class="btn btn-logout" (click)="logout()">Logout</button>
+      </div>
+    } @else {
+      <div class="auth-buttons">
+        <a routerLink="/signin" class="btn btn-login">Sign In</a>
+        <a routerLink="/signup" class="btn btn-signup">Sign Up</a>
+      </div>
     }
-
-    @else{
-    <div class="auth-buttons">
-      <a routerLink="/signin" class="btn btn-login">Sign In</a>
-      <a routerLink="/signup" class="btn btn-signup">Sign Up</a>
-    </div>
-  }
   </nav>
 </header>

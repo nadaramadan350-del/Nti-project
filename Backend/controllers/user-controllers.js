@@ -9,10 +9,10 @@ const addCourseToUser = async (req, res) => {
         .status(404)
         .json({ status: "fail", message: "User not found" });
     }
+
     const { courseId } = req.body;
 
     const course = await Course.findById(courseId);
-
     if (!course) {
       return res
         .status(404)
@@ -23,16 +23,16 @@ const addCourseToUser = async (req, res) => {
       (id) => id.toString() === courseId,
     );
 
-    if (!alreadyEnrolled) {
+    if (alreadyEnrolled) {
       return res.status(400).json({
         status: "fail",
-        message: "Course already added",
+        message: "Course already enrolled",
       });
     }
+
     user.myCourses.push(courseId);
-    course.students += 1;
-    
-    
+    course.students = (course.students || 0) + 1;
+
     await course.save();
     await user.save();
 

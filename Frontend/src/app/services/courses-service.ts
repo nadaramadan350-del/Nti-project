@@ -23,7 +23,7 @@ export class CoursesService {
     return this.httpClient.post<any>(this.baseUrl, course).pipe(map((res) => res.data.course));
   }
 
-  updateCourse(course: CourseInterface, courseId: string): Observable<CourseInterface> {
+  updateCourse(course: FormData | Partial<CourseInterface>, courseId: string): Observable<CourseInterface> {
     return this.httpClient
       .patch<any>(`${this.baseUrl}/${courseId}`, course)
       .pipe(map((res) => res.data.course));

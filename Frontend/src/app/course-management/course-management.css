@@ -69,12 +69,34 @@
   margin: 10px 0;
   color: #4ea8de;
   font-size: 13px;
+  text-transform: capitalize;
+}
+
+.meta-small {
+  color: #495057;
+}
+
+.students-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ecfdf5;
+  color: #065f46;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+
+.students-box strong {
+  font-size: 1.2rem;
 }
 
 .desc {
   font-size: 13px;
   color: #555;
   margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 .actions {
@@ -89,6 +111,7 @@
   border-radius: 6px;
   cursor: pointer;
   color: white;
+  font-weight: 600;
 }
 
 .show {
